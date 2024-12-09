@@ -1,0 +1,10 @@
+{
+  "name": "socketio-server",
+  "version": "0.0.0",
+  "description": "socket.io server",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}
