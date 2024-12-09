@@ -19,8 +19,15 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
+  socket.on("join-room", (room) => {
+    socket.join(room);
+  });
+  socket.on("chat message", (msg, room) => {
+    if (room) {
+      io.to(room).emit("chat message", msg);
+    } else {
+      io.emit("chat message", msg);
+    }
   });
 });
 
