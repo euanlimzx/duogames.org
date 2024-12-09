@@ -6,7 +6,12 @@ import { Server } from "socket.io";
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST"],
+  },
+});
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -16,12 +21,15 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("a user connected");
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
+
   socket.on("join-room", (room) => {
     socket.join(room);
   });
+
   socket.on("chat message", (msg, room) => {
     if (room) {
       io.to(room).emit("chat message", msg);

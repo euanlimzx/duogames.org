@@ -69,7 +69,7 @@
   const input = document.getElementById("input");
   const messages = document.getElementById("messages");
 
-  const socket = io();
+  const socket = io("http://localhost:3000");
   socket.emit("join-room", "DEFG");
 
   form.addEventListener("submit", (e) => {
