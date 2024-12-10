@@ -28,13 +28,13 @@ io.on("connection", (socket) => {
 
   socket.on("join-room", (room) => {
     socket.join(room);
+    console.log("room");
   });
 
-  socket.on("chat message", (msg, room) => {
+  socket.on("keystroke", (keyEvent, room) => {
     if (room) {
-      io.to(room).emit("chat message", msg);
-    } else {
-      io.emit("chat message", msg);
+      console.log(keyEvent);
+      io.to(room).emit("keystroke", keyEvent);
     }
   });
 });
