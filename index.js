@@ -27,8 +27,9 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join-room", (room) => {
+    console.log("joined room");
     socket.join(room);
-    console.log("A new user joined the room! ", room);
+    io.to(room).emit("join-room", "A new user joined the room! ");
   });
 
   socket.on("keystroke", (keyEvent, room) => {
