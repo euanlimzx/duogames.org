@@ -28,7 +28,7 @@ io.on("connection", (socket) => {
 
   socket.on("join-room", (room) => {
     socket.join(room);
-    console.log("room");
+    console.log("A new user joined the room! ", room);
   });
 
   socket.on("keystroke", (keyEvent, room) => {
@@ -36,6 +36,11 @@ io.on("connection", (socket) => {
       console.log(keyEvent);
       io.to(room).emit("keystroke", keyEvent);
     }
+  });
+
+  socket.on("keep-alive", (message, room) => {
+    console.log("keep alive received");
+    io.to(room).emit("keep-alive", "pong");
   });
 });
 
