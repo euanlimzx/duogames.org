@@ -4,6 +4,7 @@ import { ConnectionState } from "./components/ConnectionState";
 import { ConnectionManager } from "./components/ConnectionManager";
 import { Events } from "./components/Events";
 import { MyForm } from "./components/MyForm";
+import { HStack } from "@chakra-ui/react";
 
 export default function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
