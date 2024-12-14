@@ -18,8 +18,6 @@ export default function App() {
       setIsConnected(false);
     }
 
-    socket.emit("join-room", "z5km77Tv49coDyzUAAAb");
-
     function onFooEvent(value) {
       setFooEvents((previous) => [...previous, value]);
     }

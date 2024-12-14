@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import path from "path";
 import { Server } from "socket.io";
 
 const app = express();
@@ -15,12 +16,15 @@ const io = new Server(server, {
 const PORT = process.env.PORT || 3000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const buildPath = path.join(__dirname, "web-client/dist");
 
-app.get("/", (req, res) => {
-  res.sendFile(join(__dirname, "index.html"));
+app.use(express.static(buildPath));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(buildPath, "index.html"));
 });
 
 io.on("connection", (socket) => {
+  console.log(`new connection: ${socket.id}`);
   let socketRoom = null; //this code works because we assume each connection will only have one room
   socket.on("join-room", (room) => {
     console.log("message from", socket.id);
@@ -56,7 +60,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log(`user disconnected ${socket.id}`);
     if (socketRoom && socket.id == socketRoom) {
       io.to(socketRoom).emit("kill-session"); //todo @euan this doesn't work
     } else if (socketRoom) {

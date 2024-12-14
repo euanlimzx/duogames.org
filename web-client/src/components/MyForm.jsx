@@ -8,14 +8,10 @@ export function MyForm() {
   function onSubmit(event) {
     event.preventDefault();
     setIsLoading(true);
-    socket.emit(
-      "keystroke",
-      { keyDir: "keyup", keyCode: "lanjiao" },
-      "z5km77Tv49coDyzUAAAb",
-      () => {
-        setIsLoading(false);
-      }
-    );
+
+    socket.timeout(5000).emit("create-something", value, () => {
+      setIsLoading(false);
+    });
   }
 
   return (
