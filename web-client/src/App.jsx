@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { socket } from "./socket";
-import { Events } from "./components/events";
+import { Events } from "./components/Events";
 import {
   Text,
   HStack,
