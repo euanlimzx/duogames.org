@@ -38,12 +38,6 @@ io.on("connection", (socket) => {
     io.to(room).emit("room-status", "A new user joined the room! ");
   });
 
-  socket.on("disconnect", () => {
-    if (socketRoom) {
-      io.to(socketRoom).emit("room-status", "User disconnected ");
-    }
-  });
-
   socket.on("keystroke", (keyEvent, room) => {
     if (room) {
       io.to(room).emit("keystroke", keyEvent);
@@ -52,6 +46,22 @@ io.on("connection", (socket) => {
 
   socket.on("keep-alive", (message, room) => {
     io.to(room).emit("keep-alive", "pong");
+  });
+
+  socket.on("kill-session", (room) => {
+    if (room) {
+      io.to(room).emit("kill-session");
+      console.log("kill-session triggered");
+    }
+  });
+
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+    if (socketRoom && socket.id == socketRoom) {
+      io.to(socketRoom).emit("kill-session"); //todo @euan this doesn't work
+    } else if (socketRoom) {
+      io.to(socketRoom).emit("room-status", "User disconnected ");
+    }
   });
 });
 

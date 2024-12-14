@@ -111,17 +111,4 @@
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
   });
-
-  window.addEventListener("beforeunload", function (event) {
-    // Custom message is not supported in most modern browsers
-    // but you can still show a warning dialog box.
-    const message =
-      "Are you sure you want to leave? Any unsaved changes may be lost.";
-
-    // Standard browsers will show a default confirmation message.
-    event.returnValue = message;
-
-    // For older browsers or browsers that don't support 'returnValue', you can add a message like so:
-    return message;
-  });
 </script>
