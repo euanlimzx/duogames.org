@@ -67,7 +67,8 @@
   let ROOM_CODE = null;
   let keysPressed = {};
 
-  const socket = io("wss://socketio-server-do5e.onrender.com/");
+  // const socket = io("wss://socketio-server-do5e.onrender.com/");
+  const socket = io("http://localhost:3000");
 
   socket.on("connect", () => {
     ROOM_CODE = socket.id;
