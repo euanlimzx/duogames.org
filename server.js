@@ -30,7 +30,6 @@ io.on("connection", (socket) => {
     console.log("message from", socket.id);
     console.log("room: ", room);
     socket.join(room);
-    // Check if the socket is in the room by accessing socket.rooms
     if (socket.rooms.has(room)) {
       console.log(`Socket ${socket.id} successfully joined room ${room}`);
     } else {
