@@ -11,12 +11,15 @@ import {
   VStack,
   Tooltip,
 } from "@chakra-ui/react";
+import { KeyBox } from "./components/KeyBox";
 
 export default function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [events, setEvents] = useState([]);
   const [roomCode, setRoomCode] = useState(null);
   const [keysPressed, setKeysPressed] = useState({});
+
+  const [keys, setKeys] = useState([]);
 
   useEffect(() => {
     function onConnect() {
@@ -34,6 +37,14 @@ export default function App() {
 
     function onKeystroke(keyEvent) {
       const value = `keystroke received: ${keyEvent.keyDir} ${keyEvent.keyCode}`;
+      console.log(keyEvent);
+
+      if (keyEvent.keyDir === "keyup") {
+        const pressedKey = String.fromCharCode(keyEvent.keyCode);
+        const keyStrokeId = `${Date.now()}_${pressedKey}`;
+        setKeys((prev) => [...prev, { key: pressedKey, id: keyStrokeId }]);
+      }
+
       setEvents((previous) => [...previous, value]);
     }
 
@@ -44,6 +55,10 @@ export default function App() {
     const handleKeyDown = (event) => {
       if (!keysPressed[event.key]) {
         setKeysPressed((prev) => ({ ...prev, [event.key]: true }));
+
+        // // make the assumption that no one would hold down the key
+        // // which I can optionally handle later as well
+
         socket.emit(
           "keystroke",
           { keyDir: "keydown", keyCode: event.keyCode },
@@ -78,7 +93,7 @@ export default function App() {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [roomCode, keysPressed]);
+  }, [roomCode, keysPressed, keys]);
 
   return (
     <div className="App">
@@ -159,9 +174,21 @@ export default function App() {
               </Button>
             </Stack>
           </VStack>
-          <Box maxH="400px" overflow="scroll">
+          {/* <Box maxH="400px" overflow="scroll">
             <Events events={events} />
-          </Box>
+          </Box> */}
+          {/* Todo: deal with key overflow */}
+          <Flex gap={3} marginTop={10}>
+            {keys.map(({ key, id }) => (
+              // pass in identifier so the child component knows which element to remove from the array
+              <KeyBox
+                inputKey={key}
+                key={id}
+                boxIdentifier={id}
+                setKeys={setKeys}
+              />
+            ))}
+          </Flex>
         </Flex>
       )}
     </div>
