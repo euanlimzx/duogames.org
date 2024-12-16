@@ -41,8 +41,8 @@ export default function App() {
               objectFit="cover"
             />
             <Text fontSize="small" pt="0.5rem" textAlign="center">
-              Typically, this game requires a shared keyboard. But here I am,
-              playing it online with my long distance girlfriend!
+              Typically, this game requires a physical, shared keyboard. But
+              here I am, playing it online over facetime!
             </Text>
           </Flex>
           <Stack
