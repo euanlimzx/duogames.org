@@ -10,8 +10,16 @@ import {
   Button,
   VStack,
   Tooltip,
+  useToast,
+  extendTheme,
+  Spacer,
+  Alert,
+  AlertTitle,
 } from "@chakra-ui/react";
 import { KeyBox } from "./components/KeyBox";
+import { FaCheckCircle } from "react-icons/fa";
+
+const toastId = "copy-toast";
 
 export default function AppBeta() {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -20,6 +28,7 @@ export default function AppBeta() {
   const [keysPressed, setKeysPressed] = useState({});
 
   const [keys, setKeys] = useState([]);
+  const toast = useToast();
 
   useEffect(() => {
     function onConnect() {
@@ -151,6 +160,45 @@ export default function AppBeta() {
                   _hover={{ bg: "gray.100" }}
                   onClick={() => {
                     navigator.clipboard.writeText(roomCode);
+                    if (!toast.isActive(toastId)) {
+                      toast({
+                        title: "Room Code Copied!",
+                        status: "success",
+                        duration: 3000,
+                        isClosable: true,
+                        id: toastId,
+                        // containerStyle: {
+                        //   width: 10,
+                        //   maxWidth: "400px",
+                        //   display: "flex",
+                        //   justifyContent: "center",
+                        //   alignItems: "center",
+                        //   padding: 3,
+                        // },
+                        render: ({ title, onClose }) => (
+                          <Box
+                            p={2}
+                            bg="#2F8559"
+                            borderRadius="lg"
+                            textAlign="center"
+                            marginBottom={5}
+                            textColor={"white"}
+                          >
+                            <Flex
+                              alignItems={"center"}
+                              justifyContent={"center"}
+                              padding={3}
+                              gap={7}
+                            >
+                              <Text fontWeight={700} textAlign={"center"}>
+                                {title}
+                              </Text>
+                              <FaCheckCircle strokeWidth={2} />
+                            </Flex>
+                          </Box>
+                        ),
+                      });
+                    }
                   }}
                 >
                   {roomCode}
