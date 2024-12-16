@@ -157,11 +157,11 @@ export default function AppBeta() {
       )}
       {roomCode && (
         <Flex
-          h="30vh"
           bg="white"
           justifyContent="center"
           alignItems="center"
           flexDir="column"
+          pt="5rem"
         >
           <VStack>
             <Text color="black" fontSize="4xl" fontWeight="semibold" px="5rem">
