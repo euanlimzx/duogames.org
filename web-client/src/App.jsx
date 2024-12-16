@@ -12,7 +12,7 @@ export default function App() {
   return (
     <div className="App">
       <Flex
-        pt={{ base: "5rem", md: "10rem" }}
+        pt={{ base: "5rem", md: "8rem" }}
         bg="white"
         justifyContent="center"
         alignItems="center"
@@ -37,10 +37,12 @@ export default function App() {
               src="/gif.gif"
               alt="Demo video of Duogames"
               borderRadius="1rem"
+              width="40rem"
+              objectFit="cover"
             />
-            <Text fontSize="small" pt="0.5rem">
-              Typically, you can only play this game if you shared a keyboard.
-              But here I am, playing it online.
+            <Text fontSize="small" pt="0.5rem" textAlign="center">
+              Typically, this game requires a shared keyboard. But here I am,
+              playing it online with my long distance girlfriend!
             </Text>
           </Flex>
           <Stack
@@ -59,7 +61,13 @@ export default function App() {
               _hover={{ bg: "gray.700" }}
             >
               <Text fontSize={{ base: "1xl", md: "2xl" }} fontWeight="semibold">
-                Notify me when we launch!
+                <a
+                  target="_blank"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSf14A09-qgbGKrO9QF1HGemr-vJG27ebPAoNKXICcYYd0KQqA/viewform?usp=dialog"
+                >
+                  {" "}
+                  Notify me when we launch!
+                </a>
               </Text>
             </Button>
             <Text
