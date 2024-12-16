@@ -99,11 +99,12 @@ export default function AppBeta() {
     <div className="App">
       {!roomCode && (
         <Flex
-          h={{ base: "40vh", md: "70vh" }}
+          mt={{ base: "5rem", md: "10rem" }}
           bg="white"
           justifyContent="center"
           alignItems="center"
           flexDir="column"
+          p="1.5rem"
         >
           <Button
             size="xl"
@@ -120,9 +121,37 @@ export default function AppBeta() {
               Generate room code
             </Text>
           </Button>
-          <Text>
+          <Text
+            fontSize="large"
+            pt="1.5rem"
+            fontWeight="semibold"
+            maxW={{ base: "80%", md: "40%" }}
+            lineHeight="2rem"
+          >
             <p>How this works:</p>
-            <p>1.</p>
+            <p>1. Video call your friend and get them to share their screen!</p>
+            <p>
+              2. The party sharing their screen should also download our chrome
+              extension, which can be found{" "}
+              <Text
+                as="span"
+                textDecoration="underline"
+                textUnderlineOffset="3px"
+              >
+                <a href="">here</a>
+              </Text>
+            </p>
+            <p>
+              3. Play any game from{" "}
+              <Text
+                as="span"
+                textDecoration="underline"
+                textUnderlineOffset="3px"
+              >
+                <a href="">twoplayergames.org</a>
+              </Text>
+            </p>
+            <p>4. Generate a room code and play away!</p>
           </Text>
         </Flex>
       )}
