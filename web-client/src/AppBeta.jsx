@@ -103,27 +103,27 @@ export default function AppBeta() {
           bg="white"
           justifyContent="center"
           alignItems="center"
+          flexDir="column"
         >
-          <VStack gap="1.5rem">
-            <Text color="black" fontSize="5xl" fontWeight="semibold" px="5rem">
-              Play local multiplayer games, online.
+          <Button
+            size="xl"
+            borderRadius="5rem"
+            p="1.75rem"
+            onClick={() => {
+              socket.connect();
+            }}
+            background="black"
+            color="white"
+            _hover={{ bg: "gray.700" }}
+          >
+            <Text fontSize="2xl" fontWeight="semibold">
+              Generate room code
             </Text>
-            <Button
-              size="xl"
-              borderRadius="5rem"
-              p="1.75rem"
-              onClick={() => {
-                socket.connect();
-              }}
-              background="black"
-              color="white"
-              _hover={{ bg: "gray.700" }}
-            >
-              <Text fontSize="2xl" fontWeight="semibold">
-                Generate room code
-              </Text>
-            </Button>
-          </VStack>
+          </Button>
+          <Text>
+            <p>How this works:</p>
+            <p>1.</p>
+          </Text>
         </Flex>
       )}
       {roomCode && (
