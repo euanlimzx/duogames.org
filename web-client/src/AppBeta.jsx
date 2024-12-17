@@ -46,12 +46,18 @@ export default function AppBeta() {
 
     function onKeystroke(keyEvent) {
       const value = `keystroke received: ${keyEvent.keyDir} ${keyEvent.keyCode}`;
-      console.log(keyEvent);
 
       if (keyEvent.keyDir === "keyup") {
-        const pressedKey = String.fromCharCode(keyEvent.keyCode);
-        const keyStrokeId = `${Date.now()}_${pressedKey}`;
-        setKeys((prev) => [...prev, { key: pressedKey, id: keyStrokeId }]);
+        setKeys((prev) => [
+          ...prev,
+          {
+            key: keyEvent.keyCode,
+            // need to add a math.random here instead of the current time just in case the same key was pressed at the same time
+            id: `${keyEvent.timestamp}_${Math.floor(Math.random() * 100) + 1}_${
+              keyEvent.keyCode
+            }`,
+          },
+        ]);
       }
 
       setEvents((previous) => [...previous, value]);
@@ -70,7 +76,7 @@ export default function AppBeta() {
 
         socket.emit(
           "keystroke",
-          { keyDir: "keydown", keyCode: event.keyCode },
+          { keyDir: "keydown", keyCode: event.key, timestamp: event.timeStamp },
           roomCode
         );
       }
@@ -81,7 +87,7 @@ export default function AppBeta() {
       setKeysPressed((prev) => ({ ...prev, [event.key]: false }));
       socket.emit(
         "keystroke",
-        { keyDir: "keyup", keyCode: event.keyCode },
+        { keyDir: "keyup", keyCode: event.key, timestamp: event.timeStamp },
         roomCode
       );
     };
