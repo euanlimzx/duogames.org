@@ -52,64 +52,68 @@ export function RoomCode({ roomCode }) {
 
   return (
     <Stack direction={{ base: "column", md: "row" }} gap="1.5rem">
-      <Tooltip label="Click to copy">
-        <Text
-          color="black"
-          borderRadius="1rem"
-          fontSize="5xl"
-          fontWeight="semibold"
-          mx="2rem"
-          px="1rem"
-          cursor="pointer"
-          _hover={{ bg: "gray.100" }}
-          onClick={() => {
-            if (roomCode) {
-              navigator.clipboard.writeText(roomCode);
-              if (!toast.isActive(toastId)) {
-                toast({
-                  title: "Room Code Copied!",
-                  status: "success",
-                  duration: 3000,
-                  isClosable: true,
-                  id: toastId,
-                  // containerStyle: {
-                  //   width: 10,
-                  //   maxWidth: "400px",
-                  //   display: "flex",
-                  //   justifyContent: "center",
-                  //   alignItems: "center",
-                  //   padding: 3,
-                  // },
-                  render: ({ title, onClose }) => (
-                    <Box
-                      p={2}
-                      bg="#2F8559"
-                      borderRadius="lg"
-                      textAlign="center"
-                      marginBottom={5}
-                      textColor={"white"}
-                    >
-                      <Flex
-                        alignItems={"center"}
-                        justifyContent={"center"}
-                        padding={3}
-                        gap={7}
+      <Box w={{ base: "100vw", md: "55vw" }}>
+        <Tooltip label="Click to copy">
+          <Text
+            color="black"
+            borderRadius="1rem"
+            fontSize={{ base: "3xl", md: "5xl" }}
+            fontWeight="semibold"
+            textAlign="center"
+            mx="2rem"
+            px="1rem"
+            cursor="pointer"
+            _hover={{ bg: "gray.100" }}
+            onClick={() => {
+              if (roomCode) {
+                navigator.clipboard.writeText(roomCode);
+                if (!toast.isActive(toastId)) {
+                  toast({
+                    title: "Room Code Copied!",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                    id: toastId,
+                    // containerStyle: {
+                    //   width: 10,
+                    //   maxWidth: "400px",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   alignItems: "center",
+                    //   padding: 3,
+                    // },
+                    render: ({ title, onClose }) => (
+                      <Box
+                        p={2}
+                        bg="#2F8559"
+                        borderRadius="lg"
+                        textAlign="center"
+                        marginBottom={5}
+                        textColor={"white"}
                       >
-                        <Text fontWeight={700} textAlign={"center"}>
-                          {title}
-                        </Text>
-                        <FaCheckCircle strokeWidth={2} />
-                      </Flex>
-                    </Box>
-                  ),
-                });
+                        <Flex
+                          alignItems={"center"}
+                          justifyContent={"center"}
+                          padding={3}
+                          gap={7}
+                        >
+                          <Text fontWeight={700} textAlign={"center"}>
+                            {title}
+                          </Text>
+                          <FaCheckCircle strokeWidth={2} />
+                        </Flex>
+                      </Box>
+                    ),
+                  });
+                }
               }
-            }
-          }}
-        >
-          {code.join("")}
-        </Text>
-      </Tooltip>
+            }}
+          >
+            {code.join("")}
+          </Text>
+        </Tooltip>
+      </Box>
+
       <Button
         size="xl"
         borderRadius="5rem"
