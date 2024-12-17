@@ -261,17 +261,19 @@ export default function AppBeta() {
             <Events events={events} />
           </Box> */}
           {/* Todo: deal with key overflow */}
-          <Flex gap={3} marginTop={10}>
-            {keys.map(({ key, id }) => (
-              // pass in identifier so the child component knows which element to remove from the array
-              <KeyBox
-                inputKey={key}
-                key={id}
-                boxIdentifier={id}
-                setKeys={setKeys}
-              />
-            ))}
-          </Flex>
+          <Box marginTop={5} overflowX={"hidden"} padding={10} width={"87.5%"}>
+            <Flex gap={3} justifyContent={"center"}>
+              {keys.map(({ key, id }) => (
+                // pass in identifier so the child component knows which element to remove from the array
+                <KeyBox
+                  inputKey={key}
+                  key={id}
+                  boxIdentifier={id}
+                  setKeys={setKeys}
+                />
+              ))}
+            </Flex>
+          </Box>
         </Flex>
       )}
     </div>
