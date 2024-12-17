@@ -1,34 +1,17 @@
 import { useState, useEffect } from "react";
 import { socket } from "./socket";
-import { Events } from "./components/Events";
-import {
-  Text,
-  HStack,
-  Box,
-  Stack,
-  Flex,
-  Button,
-  VStack,
-  Tooltip,
-  useToast,
-  extendTheme,
-  Spacer,
-  Alert,
-  AlertTitle,
-} from "@chakra-ui/react";
+import { Text, Stack, Flex, Button, VStack } from "@chakra-ui/react";
 import { KeyBox } from "./components/KeyBox";
-import { FaCheckCircle } from "react-icons/fa";
-
-const toastId = "copy-toast";
+import { RoomCode } from "./components/RoomCode";
 
 export default function AppBeta() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [events, setEvents] = useState([]);
   const [roomCode, setRoomCode] = useState(null);
+  const [joinedRoom, setJoinedRoom] = useState(false);
   const [keysPressed, setKeysPressed] = useState({});
 
   const [keys, setKeys] = useState([]);
-  const toast = useToast();
 
   useEffect(() => {
     function onConnect() {
@@ -41,6 +24,7 @@ export default function AppBeta() {
     function onDisconnect() {
       setIsConnected(false);
       setRoomCode(null);
+      setJoinedRoom(false);
       setEvents([]);
     }
 
@@ -112,7 +96,7 @@ export default function AppBeta() {
 
   return (
     <div className="App">
-      {!roomCode && (
+      {!joinedRoom && (
         <Flex
           mt={{ base: "5rem", md: "10rem" }}
           bg="white"
@@ -126,6 +110,7 @@ export default function AppBeta() {
             borderRadius="5rem"
             p="1.75rem"
             onClick={() => {
+              setJoinedRoom(true); //todo @euan error handle this
               socket.connect();
             }}
             background="black"
@@ -153,7 +138,12 @@ export default function AppBeta() {
                 textDecoration="underline"
                 textUnderlineOffset="3px"
               >
-                <a href="">here</a>
+                <a
+                  href="https://github.com/euanlimzx/websocket"
+                  target="_blank"
+                >
+                  here
+                </a>
               </Text>
             </p>
             <p>
@@ -163,14 +153,20 @@ export default function AppBeta() {
                 textDecoration="underline"
                 textUnderlineOffset="3px"
               >
-                <a href="">twoplayergames.org</a>
+                <a
+                  href="https://www.twoplayergames.org/game/basket-random"
+                  target="_blank"
+                >
+                  twoplayergames.org
+                </a>
               </Text>
+              {""} and click 'Multi-play!'
             </p>
             <p>4. Generate a room code and play away!</p>
           </Text>
         </Flex>
       )}
-      {roomCode && (
+      {joinedRoom && (
         <Flex
           bg="white"
           justifyContent="center"
@@ -182,80 +178,7 @@ export default function AppBeta() {
             <Text color="black" fontSize="4xl" fontWeight="semibold" px="5rem">
               Your room code:
             </Text>
-            <Stack direction={{ base: "column", md: "row" }} gap="1.5rem">
-              <Tooltip label="Click to copy">
-                <Text
-                  color="black"
-                  borderRadius="1rem"
-                  fontSize="5xl"
-                  fontWeight="semibold"
-                  mx="2rem"
-                  px="1rem"
-                  cursor="pointer"
-                  _hover={{ bg: "gray.100" }}
-                  onClick={() => {
-                    navigator.clipboard.writeText(roomCode);
-                    if (!toast.isActive(toastId)) {
-                      toast({
-                        title: "Room Code Copied!",
-                        status: "success",
-                        duration: 3000,
-                        isClosable: true,
-                        id: toastId,
-                        // containerStyle: {
-                        //   width: 10,
-                        //   maxWidth: "400px",
-                        //   display: "flex",
-                        //   justifyContent: "center",
-                        //   alignItems: "center",
-                        //   padding: 3,
-                        // },
-                        render: ({ title, onClose }) => (
-                          <Box
-                            p={2}
-                            bg="#2F8559"
-                            borderRadius="lg"
-                            textAlign="center"
-                            marginBottom={5}
-                            textColor={"white"}
-                          >
-                            <Flex
-                              alignItems={"center"}
-                              justifyContent={"center"}
-                              padding={3}
-                              gap={7}
-                            >
-                              <Text fontWeight={700} textAlign={"center"}>
-                                {title}
-                              </Text>
-                              <FaCheckCircle strokeWidth={2} />
-                            </Flex>
-                          </Box>
-                        ),
-                      });
-                    }
-                  }}
-                >
-                  {roomCode}
-                </Text>
-              </Tooltip>
-              <Button
-                size="xl"
-                borderRadius="5rem"
-                p="1.75rem"
-                mx={{ base: "3rem", md: "0rem" }}
-                onClick={() => {
-                  socket.disconnect();
-                }}
-                background="black"
-                color="white"
-                _hover={{ bg: "gray.700" }}
-              >
-                <Text fontSize="2xl" fontWeight="semibold">
-                  Disconnect
-                </Text>
-              </Button>
-            </Stack>
+            <RoomCode roomCode={roomCode} />
           </VStack>
           {/* <Box maxH="400px" overflow="scroll">
             <Events events={events} />
