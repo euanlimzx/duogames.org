@@ -132,7 +132,12 @@ export default function AppBeta() {
                 textDecoration="underline"
                 textUnderlineOffset="3px"
               >
-                <a href="">here</a>
+                <a
+                  href="https://github.com/euanlimzx/websocket"
+                  target="_blank"
+                >
+                  here
+                </a>
               </Text>
             </p>
             <p>
@@ -142,8 +147,14 @@ export default function AppBeta() {
                 textDecoration="underline"
                 textUnderlineOffset="3px"
               >
-                <a href="">twoplayergames.org</a>
+                <a
+                  href="https://www.twoplayergames.org/game/basket-random"
+                  target="_blank"
+                >
+                  twoplayergames.org
+                </a>
               </Text>
+              {""} and click 'Multi-play!'
             </p>
             <p>4. Generate a room code and play away!</p>
           </Text>
