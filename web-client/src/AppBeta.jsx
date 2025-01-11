@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { socket } from "./socket";
-import { Text, Stack, Flex, Button, VStack } from "@chakra-ui/react";
+import { Text, Box, Flex, Button, VStack, useToast } from "@chakra-ui/react";
 import { KeyBox } from "./components/KeyBox";
 import { RoomCode } from "./components/RoomCode";
+import CustomSuccessToast from "./components/CustomSuccessToast";
+
+const userJoinToastId = "user-toast";
 
 export default function AppBeta() {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -12,6 +15,7 @@ export default function AppBeta() {
   const [keysPressed, setKeysPressed] = useState({});
 
   const [keys, setKeys] = useState([]);
+  const newUserToast = useToast();
 
   useEffect(() => {
     function onConnect() {
@@ -49,6 +53,23 @@ export default function AppBeta() {
 
     function onRoomUpdate(update) {
       setEvents((previous) => [...previous, update]);
+      // since the actual user being in the room counts as 1, update that a new user has joined the room only when there is > 1 user
+
+      // TODO: need to set a cap on the number of new user banners that appear since multiple users can join at the same time
+      if (
+        update.newUser &&
+        update.numberOfUsers > 1 &&
+        !newUserToast.isActive(userJoinToastId)
+      ) {
+        newUserToast({
+          title: "New User Joined!",
+          status: "success",
+          duration: 1500,
+          isClosable: true,
+          id: userJoinToastId,
+          render: ({ title }) => <CustomSuccessToast title={title} />,
+        });
+      }
     }
 
     const handleKeyDown = (event) => {
