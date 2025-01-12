@@ -13,6 +13,7 @@ export default function AppBeta() {
   const [roomCode, setRoomCode] = useState(null);
   const [joinedRoom, setJoinedRoom] = useState(false);
   const [keysPressed, setKeysPressed] = useState({});
+  const [numberOfPlayers, setNumberOfPlayers] = useState(0);
 
   const [keys, setKeys] = useState([]);
   const newUserToast = useToast();
@@ -54,9 +55,10 @@ export default function AppBeta() {
     function onRoomUpdate(update) {
       setEvents((previous) => [...previous, update]);
       // since the actual user being in the room counts as 1, update that a new user has joined the room only when there is > 1 user
-
+      console.log(update, socket, update.roomId === socket.id);
       // TODO: need to set a cap on the number of new user banners that appear since multiple users can join at the same time
       if (
+        // update.socketId === socket.id &&
         update.newUser &&
         update.numberOfUsers > 1 &&
         !newUserToast.isActive(userJoinToastId)
@@ -69,6 +71,11 @@ export default function AppBeta() {
           id: userJoinToastId,
           render: ({ title }) => <CustomSuccessToast title={title} />,
         });
+
+        setNumberOfPlayers(update.numberOfUsers);
+      } else if (update.roomId === socket.id && update.userDisconnected) {
+        console.log("A user has disconnected");
+        setNumberOfPlayers((numPlayers) => numPlayers - 1);
       }
     }
 
@@ -133,6 +140,7 @@ export default function AppBeta() {
             onClick={() => {
               setJoinedRoom(true); //todo @euan error handle this
               socket.connect();
+              setNumberOfPlayers(1);
             }}
             background="black"
             color="white"
@@ -205,6 +213,16 @@ export default function AppBeta() {
             <Events events={events} />
           </Box> */}
           {/* Todo: deal with key overflow */}
+          <Box mt={12}>
+            <Flex gap={3}>
+              <Text color="black" fontSize="2xl">
+                Number of players in room:
+              </Text>
+              <Text color="black" fontSize="2xl" fontWeight="semibold">
+                {numberOfPlayers}
+              </Text>
+            </Flex>
+          </Box>
           <Box marginTop={5} overflowX={"hidden"} padding={10} width={"87.5%"}>
             <Flex gap={3} justifyContent={"center"}>
               {keys.map(({ key, id }) => (

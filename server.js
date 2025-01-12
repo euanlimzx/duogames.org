@@ -42,6 +42,7 @@ io.on("connection", (socket) => {
       message: "A new user joined the room! ",
       newUser: true,
       numberOfUsers: roomSize,
+      roomId: socketRoom,
     });
     console.log("connection received");
   });
@@ -70,7 +71,8 @@ io.on("connection", (socket) => {
     } else if (socketRoom) {
       io.to(socketRoom).emit("room-status", {
         message: "User disconnected ",
-        newUser: false,
+        userDisconnected: true,
+        roomId: socketRoom,
       });
     }
   });
