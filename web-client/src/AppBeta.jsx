@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { socket } from "./socket";
-import { Text, Stack, Flex, Button, VStack } from "@chakra-ui/react";
+import { Text, Box, Flex, Button, VStack, useToast } from "@chakra-ui/react";
 import { KeyBox } from "./components/KeyBox";
 import { RoomCode } from "./components/RoomCode";
+import CustomSuccessToast from "./components/CustomSuccessToast";
+
+const userJoinToastId = "user-toast";
 
 export default function AppBeta() {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -12,6 +15,7 @@ export default function AppBeta() {
   const [keysPressed, setKeysPressed] = useState({});
 
   const [keys, setKeys] = useState([]);
+  const newUserToast = useToast();
 
   useEffect(() => {
     function onConnect() {
@@ -30,12 +34,18 @@ export default function AppBeta() {
 
     function onKeystroke(keyEvent) {
       const value = `keystroke received: ${keyEvent.keyDir} ${keyEvent.keyCode}`;
-      console.log(keyEvent);
 
       if (keyEvent.keyDir === "keyup") {
-        const pressedKey = String.fromCharCode(keyEvent.keyCode);
-        const keyStrokeId = `${Date.now()}_${pressedKey}`;
-        setKeys((prev) => [...prev, { key: pressedKey, id: keyStrokeId }]);
+        setKeys((prev) => [
+          ...prev,
+          {
+            key: keyEvent.keyCode,
+            // need to add a math.random here instead of the current time just in case the same key was pressed at the same time
+            id: `${keyEvent.timestamp}_${Math.floor(Math.random() * 100) + 1}_${
+              keyEvent.keyCode
+            }`,
+          },
+        ]);
       }
 
       setEvents((previous) => [...previous, value]);
@@ -43,6 +53,23 @@ export default function AppBeta() {
 
     function onRoomUpdate(update) {
       setEvents((previous) => [...previous, update]);
+      // since the actual user being in the room counts as 1, update that a new user has joined the room only when there is > 1 user
+
+      // TODO: need to set a cap on the number of new user banners that appear since multiple users can join at the same time
+      if (
+        update.newUser &&
+        update.numberOfUsers > 1 &&
+        !newUserToast.isActive(userJoinToastId)
+      ) {
+        newUserToast({
+          title: "New User Joined!",
+          status: "success",
+          duration: 1500,
+          isClosable: true,
+          id: userJoinToastId,
+          render: ({ title }) => <CustomSuccessToast title={title} />,
+        });
+      }
     }
 
     const handleKeyDown = (event) => {
@@ -54,7 +81,7 @@ export default function AppBeta() {
 
         socket.emit(
           "keystroke",
-          { keyDir: "keydown", keyCode: event.keyCode },
+          { keyDir: "keydown", keyCode: event.key, timestamp: event.timeStamp },
           roomCode
         );
       }
@@ -65,7 +92,7 @@ export default function AppBeta() {
       setKeysPressed((prev) => ({ ...prev, [event.key]: false }));
       socket.emit(
         "keystroke",
-        { keyDir: "keyup", keyCode: event.keyCode },
+        { keyDir: "keyup", keyCode: event.key, timestamp: event.timeStamp },
         roomCode
       );
     };
@@ -178,17 +205,19 @@ export default function AppBeta() {
             <Events events={events} />
           </Box> */}
           {/* Todo: deal with key overflow */}
-          <Flex gap={3} marginTop={10}>
-            {keys.map(({ key, id }) => (
-              // pass in identifier so the child component knows which element to remove from the array
-              <KeyBox
-                inputKey={key}
-                key={id}
-                boxIdentifier={id}
-                setKeys={setKeys}
-              />
-            ))}
-          </Flex>
+          <Box marginTop={5} overflowX={"hidden"} padding={10} width={"87.5%"}>
+            <Flex gap={3} justifyContent={"center"}>
+              {keys.map(({ key, id }) => (
+                // pass in identifier so the child component knows which element to remove from the array
+                <KeyBox
+                  inputKey={key}
+                  key={id}
+                  boxIdentifier={id}
+                  setKeys={setKeys}
+                />
+              ))}
+            </Flex>
+          </Box>
         </Flex>
       )}
     </div>

@@ -38,7 +38,12 @@ io.on("connection", (socket) => {
     const roomSize = io.sockets.adapter.rooms.get(room)?.size || 0;
     console.log(`Number of clients in room ${room}:`, roomSize);
     socketRoom = room;
-    io.to(room).emit("room-status", "A new user joined the room! ");
+    io.to(room).emit("room-status", {
+      message: "A new user joined the room! ",
+      newUser: true,
+      numberOfUsers: roomSize,
+    });
+    console.log("connection received");
   });
 
   socket.on("keystroke", (keyEvent, room) => {
@@ -63,7 +68,10 @@ io.on("connection", (socket) => {
     if (socketRoom && socket.id == socketRoom) {
       io.to(socketRoom).emit("kill-session"); //todo @euan this doesn't work
     } else if (socketRoom) {
-      io.to(socketRoom).emit("room-status", "User disconnected ");
+      io.to(socketRoom).emit("room-status", {
+        message: "User disconnected ",
+        newUser: false,
+      });
     }
   });
 });
@@ -71,3 +79,5 @@ io.on("connection", (socket) => {
 server.listen(PORT, () => {
   console.log("server running at ", PORT);
 });
+
+console.log("sheesh the dish");

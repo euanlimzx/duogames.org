@@ -10,6 +10,7 @@ import {
 import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { socket } from "../socket";
+import CustomSuccessToast from "./CustomSuccessToast";
 export function RoomCode({ roomCode }) {
   const toastId = "copy-toast";
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -74,36 +75,7 @@ export function RoomCode({ roomCode }) {
                     duration: 3000,
                     isClosable: true,
                     id: toastId,
-                    // containerStyle: {
-                    //   width: 10,
-                    //   maxWidth: "400px",
-                    //   display: "flex",
-                    //   justifyContent: "center",
-                    //   alignItems: "center",
-                    //   padding: 3,
-                    // },
-                    render: ({ title, onClose }) => (
-                      <Box
-                        p={2}
-                        bg="#2F8559"
-                        borderRadius="lg"
-                        textAlign="center"
-                        marginBottom={5}
-                        textColor={"white"}
-                      >
-                        <Flex
-                          alignItems={"center"}
-                          justifyContent={"center"}
-                          padding={3}
-                          gap={7}
-                        >
-                          <Text fontWeight={700} textAlign={"center"}>
-                            {title}
-                          </Text>
-                          <FaCheckCircle strokeWidth={2} />
-                        </Flex>
-                      </Box>
-                    ),
+                    render: ({ title }) => <CustomSuccessToast title={title} />,
                   });
                 }
               }
