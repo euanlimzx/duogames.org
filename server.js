@@ -68,11 +68,9 @@ io.on("connection", (socket) => {
     if (socketRoom && socket.id == socketRoom) {
       io.to(socketRoom).emit("kill-session"); //todo @euan this doesn't work
     } else if (socketRoom) {
-      const roomSize = io.sockets.adapter.rooms.get(room)?.size || 0;
       io.to(socketRoom).emit("room-status", {
         message: "User disconnected ",
         newUser: false,
-        numberOfUsers: roomSize,
       });
     }
   });
