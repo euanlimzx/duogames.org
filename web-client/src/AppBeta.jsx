@@ -17,8 +17,8 @@ export default function AppBeta() {
     function onConnect() {
       setIsConnected(true);
       setRoomCode(socket.id);
-      console.log(roomCode);
-      socket.emit("join-room", roomCode);
+      console.log(socket.id);
+      socket.emit("join-room", socket.id);
     }
 
     function onDisconnect() {
