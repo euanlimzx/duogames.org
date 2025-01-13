@@ -128,12 +128,10 @@ export default function AppBeta() {
   useEffect(() => {
     //check if inactive user
     const interval = setInterval(() => {
-      console.log("Running check");
       if (isConnected) {
         const currentTime = Date.now();
         const timeSinceLastEvent = currentTime - lastKeyPressTime;
         if (timeSinceLastEvent >= 180000) {
-          console.log("failed check");
           if (socket.connected) {
             socket.disconnect();
           } else {
