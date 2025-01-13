@@ -217,10 +217,7 @@ export default function AppBeta() {
             <RoomCode roomCode={roomCode} />
           </VStack>
           <Box mt={12}>
-            <ConnectionStatus
-              isConnected={isConnected}
-              setIsConnected={setIsConnected}
-            />
+            <ConnectionStatus isConnected={isConnected} />
             <Flex gap={3}>
               <Text color="black" fontSize="2xl">
                 Number of players in room:

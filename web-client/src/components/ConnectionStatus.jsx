@@ -1,19 +1,5 @@
 import { Flex, Text, Box } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { socket } from "../socket";
-export function ConnectionStatus({ isConnected, setIsConnected }) {
-  useEffect(() => {
-    const checkConnection = setInterval(() => {
-      if (!socket.connected) {
-        setIsConnected(false);
-      }
-      console.log("still alive");
-    }, 2000); // 1000ms = 1 second
-
-    return () => {
-      clearInterval(checkConnection);
-    };
-  }, []);
+export function ConnectionStatus({ isConnected }) {
   return (
     <Flex gap={3}>
       <Text color="black" fontSize="2xl">
