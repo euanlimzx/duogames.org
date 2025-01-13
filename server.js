@@ -57,29 +57,16 @@ io.on("connection", (socket) => {
     io.to(room).emit("keep-alive", "pong");
   });
 
-  socket.on("kill-session", (room) => {
-    if (room) {
-      io.to(room).emit("kill-session");
-      console.log("kill-session triggered");
-    }
-  });
-
   socket.on("disconnect", () => {
     console.log(`user disconnected ${socket.id}`);
-    if (socketRoom && socket.id == socketRoom) {
-      io.to(socketRoom).emit("kill-session"); //todo @euan this doesn't work
-    } else if (socketRoom) {
-      io.to(socketRoom).emit("room-status", {
-        message: "User disconnected ",
-        userDisconnected: true,
-        roomId: socketRoom,
-      });
-    }
+    io.to(socketRoom).emit("room-status", {
+      message: "User disconnected ",
+      userDisconnected: true,
+      roomId: socketRoom,
+    });
   });
 });
 
 server.listen(PORT, () => {
   console.log("server running at ", PORT);
 });
-
-console.log("sheesh the dish");
