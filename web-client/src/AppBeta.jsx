@@ -4,6 +4,7 @@ import { Text, Box, Flex, Button, VStack, useToast } from "@chakra-ui/react";
 import { KeyBox } from "./components/KeyBox";
 import { RoomCode } from "./components/RoomCode";
 import CustomSuccessToast from "./components/CustomSuccessToast";
+import { ConnectionStatus } from "./components/ConnectionStatus";
 
 const userJoinToastId = "user-toast";
 
@@ -204,16 +205,22 @@ export default function AppBeta() {
           pt="5rem"
         >
           <VStack>
-            <Text color="black" fontSize="4xl" fontWeight="semibold" px="5rem">
+            <Text
+              color="black"
+              fontSize="4xl"
+              fontWeight="semibold"
+              px="5rem"
+              textAlign="center"
+            >
               Your room code:
             </Text>
-            <RoomCode roomCode={roomCode} />
+            <RoomCode roomCode={roomCode} onDisconnect={onDisconnect} />
           </VStack>
-          {/* <Box maxH="400px" overflow="scroll">
-            <Events events={events} />
-          </Box> */}
-          {/* Todo: deal with key overflow */}
           <Box mt={12}>
+            <ConnectionStatus
+              isConnected={isConnected}
+              setIsConnected={setIsConnected}
+            />
             <Flex gap={3}>
               <Text color="black" fontSize="2xl">
                 Number of players in room:
