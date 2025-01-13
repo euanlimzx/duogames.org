@@ -157,6 +157,7 @@ export default function AppBeta() {
             fontWeight="semibold"
             maxW={{ base: "80%", md: "40%" }}
             lineHeight="2rem"
+            as="span"
           >
             <p>How this works:</p>
             <p>1. Video call your friend and get them to share their screen!</p>
