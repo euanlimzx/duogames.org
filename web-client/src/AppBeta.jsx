@@ -214,7 +214,7 @@ export default function AppBeta() {
             >
               Your room code:
             </Text>
-            <RoomCode roomCode={roomCode} onDisconnect={onDisconnect} />
+            <RoomCode roomCode={roomCode} />
           </VStack>
           <Box mt={12}>
             <ConnectionStatus
