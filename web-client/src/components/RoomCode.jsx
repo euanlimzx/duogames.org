@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { socket } from "../socket";
 import CustomSuccessToast from "./CustomSuccessToast";
-export function RoomCode({ roomCode }) {
+export function RoomCode({ roomCode, onDisconnect }) {
   const toastId = "copy-toast";
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const SOCKET_ID_LENGTH = 20;
@@ -92,7 +92,11 @@ export function RoomCode({ roomCode }) {
         p="1.75rem"
         mx={{ base: "3rem", md: "0rem" }}
         onClick={() => {
-          socket.disconnect();
+          if (socket.connected) {
+            socket.disconnect();
+          } else {
+            onDisconnect(0);
+          }
         }}
         background="black"
         color="white"

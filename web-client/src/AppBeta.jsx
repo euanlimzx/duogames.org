@@ -19,19 +19,19 @@ export default function AppBeta() {
   const [keys, setKeys] = useState([]);
   const newUserToast = useToast();
 
+  function onDisconnect() {
+    setIsConnected(false);
+    setRoomCode(null);
+    setJoinedRoom(false);
+    setEvents([]);
+  }
+
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);
       setRoomCode(socket.id);
       console.log(socket.id);
       socket.emit("join-room", socket.id);
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-      setRoomCode(null);
-      setJoinedRoom(false);
-      setEvents([]);
     }
 
     function onKeystroke(keyEvent) {
@@ -215,7 +215,7 @@ export default function AppBeta() {
             >
               Your room code:
             </Text>
-            <RoomCode roomCode={roomCode} />
+            <RoomCode roomCode={roomCode} onDisconnect={onDisconnect} />
           </VStack>
           <Box mt={12}>
             <ConnectionStatus isConnected={isConnected} />
