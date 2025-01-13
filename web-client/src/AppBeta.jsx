@@ -15,6 +15,7 @@ export default function AppBeta() {
   const [joinedRoom, setJoinedRoom] = useState(false);
   const [keysPressed, setKeysPressed] = useState({});
   const [numberOfPlayers, setNumberOfPlayers] = useState(0);
+  const [lastKeyPressTime, setLastKeyPressTime] = useState(Date.now());
 
   const [keys, setKeys] = useState([]);
   const newUserToast = useToast();
@@ -35,6 +36,7 @@ export default function AppBeta() {
     }
 
     function onKeystroke(keyEvent) {
+      setLastKeyPressTime(Date.now());
       const value = `keystroke received: ${keyEvent.keyDir} ${keyEvent.keyCode}`;
 
       if (keyEvent.keyDir === "keyup") {
@@ -122,6 +124,26 @@ export default function AppBeta() {
       window.removeEventListener("keyup", handleKeyUp);
     };
   }, [roomCode, keysPressed, keys]);
+
+  useEffect(() => {
+    //check if inactive user
+    const interval = setInterval(() => {
+      console.log("Running check");
+      if (isConnected) {
+        const currentTime = Date.now();
+        const timeSinceLastEvent = currentTime - lastKeyPressTime;
+        if (timeSinceLastEvent >= 180000) {
+          console.log("failed check");
+          if (socket.connected) {
+            socket.disconnect();
+          } else {
+            onDisconnect();
+          }
+        }
+      }
+    }, 180000); // Check every minute
+    return () => clearInterval(interval);
+  }, [lastKeyPressTime, isConnected]);
 
   return (
     <div className="App">
