@@ -5,6 +5,12 @@ import { KeyBox } from "./components/KeyBox";
 import { RoomCode } from "./components/RoomCode";
 import CustomSuccessToast from "./components/CustomSuccessToast";
 import { ConnectionStatus } from "./components/ConnectionStatus";
+import {
+  GAME_COUNTER_ENDPOINT,
+  USER_COOKIE_NAME,
+  USER_COUNTER_ENDPOINT,
+} from "./global";
+import axios from "axios";
 
 const userJoinToastId = "user-toast";
 
@@ -25,6 +31,29 @@ export default function AppBeta() {
     setRoomCode(null);
     setJoinedRoom(false);
     setEvents([]);
+  }
+
+  async function setCookieIfNotExists() {
+    // Check if the cookie is set
+    const cookieName = USER_COOKIE_NAME;
+    const cookieExists = document.cookie
+      .split(";")
+      .some((item) => item.trim().startsWith(cookieName + "="));
+
+    if (!cookieExists) {
+      // Set the cookie if not exists
+      await axios.get(`${USER_COUNTER_ENDPOINT}/up`);
+      document.cookie = `${cookieName}=${cookieName}; path=/;`;
+      console.log("Cookie has been set!");
+    }
+  }
+
+  async function generateRoom() {
+    setJoinedRoom(true); //todo @euan error handle this
+    socket.connect();
+    setNumberOfPlayers(1);
+    await axios.get(`${GAME_COUNTER_ENDPOINT}/up`);
+    setCookieIfNotExists();
   }
 
   useEffect(() => {
@@ -158,11 +187,7 @@ export default function AppBeta() {
             size="xl"
             borderRadius="5rem"
             p="1.75rem"
-            onClick={() => {
-              setJoinedRoom(true); //todo @euan error handle this
-              socket.connect();
-              setNumberOfPlayers(1);
-            }}
+            onClick={generateRoom}
             background="black"
             color="white"
             _hover={{ bg: "gray.700" }}
