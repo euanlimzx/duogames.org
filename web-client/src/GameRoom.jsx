@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { socket } from "./socket";
 import { Text, Box, Flex, Button, VStack, useToast } from "@chakra-ui/react";
 import { KeyBox } from "./components/KeyBox";
@@ -11,14 +11,17 @@ import {
   USER_COUNTER_ENDPOINT,
 } from "./global";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const userJoinToastId = "user-toast";
 
-export default function AppBeta() {
+export default function GameRoom() {
+  let navigate = useNavigate();
+
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [events, setEvents] = useState([]);
   const [roomCode, setRoomCode] = useState(null);
-  const [joinedRoom, setJoinedRoom] = useState(false);
+  const [joinedRoom, setJoinedRoom] = useState(true);
   const [keysPressed, setKeysPressed] = useState({});
   const [numberOfPlayers, setNumberOfPlayers] = useState(0);
   const [lastKeyPressTime, setLastKeyPressTime] = useState(Date.now());
@@ -31,6 +34,7 @@ export default function AppBeta() {
     setRoomCode(null);
     setJoinedRoom(false);
     setEvents([]);
+    navigate("/");
   }
 
   async function setCookieIfNotExists() {
@@ -48,13 +52,13 @@ export default function AppBeta() {
     }
   }
 
-  async function generateRoom() {
+  const generateRoom = useCallback(async () => {
     setJoinedRoom(true); //todo @euan error handle this
     socket.connect();
     setNumberOfPlayers(1);
     await axios.get(`${GAME_COUNTER_ENDPOINT}/up`);
     setCookieIfNotExists();
-  }
+  }, []);
 
   useEffect(() => {
     function onConnect() {
@@ -152,7 +156,7 @@ export default function AppBeta() {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [roomCode, keysPressed, keys]);
+  }, [roomCode, keysPressed, keys, newUserToast]);
 
   useEffect(() => {
     //check if inactive user
@@ -172,31 +176,13 @@ export default function AppBeta() {
     return () => clearInterval(interval);
   }, [lastKeyPressTime, isConnected]);
 
+  useEffect(() => {
+    (async () => await generateRoom())();
+  }, [generateRoom]);
+
   return (
     <div className="App">
-      {!joinedRoom && (
-        <Flex
-          mt={{ base: "5rem", md: "10rem" }}
-          bg="white"
-          justifyContent="center"
-          alignItems="center"
-          flexDir="column"
-          p="1.5rem"
-        >
-          <Button
-            size="xl"
-            borderRadius="5rem"
-            p="1.75rem"
-            onClick={generateRoom}
-            background="black"
-            color="white"
-            _hover={{ bg: "gray.700" }}
-          >
-            <Text fontSize="2xl" fontWeight="semibold">
-              Generate room code
-            </Text>
-          </Button>
-          <Text
+      {/* <Text
             fontSize="large"
             pt="1.5rem"
             fontWeight="semibold"
@@ -239,55 +225,51 @@ export default function AppBeta() {
               {""} and click 'Multi-play!'
             </p>
             <p>4. Generate a room code and play away!</p>
+          </Text> */}
+      <Flex
+        bg="white"
+        justifyContent="center"
+        alignItems="center"
+        flexDir="column"
+        pt="5rem"
+      >
+        <VStack>
+          <Text
+            color="black"
+            fontSize="4xl"
+            fontWeight="semibold"
+            px="5rem"
+            textAlign="center"
+          >
+            Your room code:
           </Text>
-        </Flex>
-      )}
-      {joinedRoom && (
-        <Flex
-          bg="white"
-          justifyContent="center"
-          alignItems="center"
-          flexDir="column"
-          pt="5rem"
-        >
-          <VStack>
-            <Text
-              color="black"
-              fontSize="4xl"
-              fontWeight="semibold"
-              px="5rem"
-              textAlign="center"
-            >
-              Your room code:
+          <RoomCode roomCode={roomCode} onDisconnect={onDisconnect} />
+        </VStack>
+        <Box mt={12}>
+          <ConnectionStatus isConnected={isConnected} />
+          <Flex gap={3}>
+            <Text color="black" fontSize="2xl">
+              Number of players in room:
             </Text>
-            <RoomCode roomCode={roomCode} onDisconnect={onDisconnect} />
-          </VStack>
-          <Box mt={12}>
-            <ConnectionStatus isConnected={isConnected} />
-            <Flex gap={3}>
-              <Text color="black" fontSize="2xl">
-                Number of players in room:
-              </Text>
-              <Text color="black" fontSize="2xl" fontWeight="semibold">
-                {numberOfPlayers}
-              </Text>
-            </Flex>
-          </Box>
-          <Box marginTop={5} overflowX={"hidden"} padding={10} width={"87.5%"}>
-            <Flex gap={3} justifyContent={"center"}>
-              {keys.map(({ key, id }) => (
-                // pass in identifier so the child component knows which element to remove from the array
-                <KeyBox
-                  inputKey={key}
-                  key={id}
-                  boxIdentifier={id}
-                  setKeys={setKeys}
-                />
-              ))}
-            </Flex>
-          </Box>
-        </Flex>
-      )}
+            <Text color="black" fontSize="2xl" fontWeight="semibold">
+              {numberOfPlayers}
+            </Text>
+          </Flex>
+        </Box>
+        <Box marginTop={5} overflowX={"hidden"} padding={10} width={"87.5%"}>
+          <Flex gap={3} justifyContent={"center"}>
+            {keys.map(({ key, id }) => (
+              // pass in identifier so the child component knows which element to remove from the array
+              <KeyBox
+                inputKey={key}
+                key={id}
+                boxIdentifier={id}
+                setKeys={setKeys}
+              />
+            ))}
+          </Flex>
+        </Box>
+      </Flex>
     </div>
   );
 }

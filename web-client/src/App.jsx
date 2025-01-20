@@ -7,8 +7,11 @@ import {
   Stack,
   Image,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 export default function App() {
+  let navigate = useNavigate();
+
   return (
     <div className="App">
       <Flex
@@ -53,31 +56,24 @@ export default function App() {
             pt="1rem"
           >
             <Button
-              size="xl"
-              borderRadius={{ base: "2.5rem", md: "5rem" }}
+              size="lg"
               p={{ base: "1rem", md: "1.75rem" }}
               background="black"
               color="white"
               _hover={{ bg: "gray.700" }}
+              onClick={() => navigate("/game-room")}
             >
-              <Text fontSize={{ base: "1xl", md: "2xl" }} fontWeight="semibold">
-                <a
-                  target="_blank"
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSf14A09-qgbGKrO9QF1HGemr-vJG27ebPAoNKXICcYYd0KQqA/viewform?usp=dialog"
-                >
-                  {" "}
-                  Notify me when we launch!
-                </a>
+              <Text fontSize={{ base: "lg", md: "1xl" }} fontWeight="semibold">
+                Generate Room Code
               </Text>
             </Button>
-            <Text
-              textAlign="center"
-              pt="1rem"
-              fontWeight="semibold"
-              _hover={{ textDecoration: "underline" }}
+            <Button
+              size="lg"
+              p={{ base: "1rem", md: "1.75rem" }}
+              _hover={{ bg: "gray.200" }}
             >
-              <a href="/beta">Or, try out the beta</a>
-            </Text>
+              Download Extension
+            </Button>
           </Stack>
         </VStack>
       </Flex>
