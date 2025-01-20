@@ -21,7 +21,6 @@ export default function GameRoom() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [events, setEvents] = useState([]);
   const [roomCode, setRoomCode] = useState(null);
-  const [joinedRoom, setJoinedRoom] = useState(true);
   const [keysPressed, setKeysPressed] = useState({});
   const [numberOfPlayers, setNumberOfPlayers] = useState(0);
   const [lastKeyPressTime, setLastKeyPressTime] = useState(Date.now());
@@ -32,7 +31,6 @@ export default function GameRoom() {
   function onDisconnect() {
     setIsConnected(false);
     setRoomCode(null);
-    setJoinedRoom(false);
     setEvents([]);
     navigate("/");
   }
@@ -53,7 +51,6 @@ export default function GameRoom() {
   }
 
   const generateRoom = useCallback(async () => {
-    setJoinedRoom(true); //todo @euan error handle this
     socket.connect();
     setNumberOfPlayers(1);
     await axios.get(`${GAME_COUNTER_ENDPOINT}/up`);
