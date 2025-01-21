@@ -19,7 +19,7 @@ export function LandingPageTitle() {
       bg="white"
       justifyContent="center"
       alignItems="center"
-      height={"40rem"}
+      height={"45rem"}
     >
       <Flex gap="1.5rem">
         <VStack spacing="3rem" flex={1} justify={"space-evenly"}>
