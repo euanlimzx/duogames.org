@@ -41,7 +41,11 @@ export default function App() {
                 width={"15rem"}
               >
                 <HStack>
-                  <Image src="/chrome_web_store.svg" width={"3rem"} />
+                  <Image
+                    src="/chrome_web_store.svg"
+                    width={"3rem"}
+                    marginRight={"0.5rem"}
+                  />
                   <Text color={"white"} fontWeight={"bold"}>
                     Add to Chrome
                   </Text>
@@ -56,7 +60,7 @@ export default function App() {
             />
             <VStack>
               <Text fontSize={"xl"} fontWeight={"bold"}>
-                2. Set up screen sharing with your partner
+                2. Get your partner to start screen sharing
               </Text>
               <Text width={"20rem"} textAlign={"center"}>
                 For the best experience, we'd recommend{" "}
