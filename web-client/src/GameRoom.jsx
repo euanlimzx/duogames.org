@@ -12,6 +12,7 @@ import {
 } from "./global";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { DuoNavBar } from "./components/DuoNavBar";
 
 const userJoinToastId = "user-toast";
 
@@ -179,6 +180,16 @@ export default function GameRoom() {
 
   return (
     <div className="App">
+      <DuoNavBar
+        handleLogoClick={() => {
+          if (socket.connected) {
+            socket.disconnect();
+          } else {
+            onDisconnect(0);
+          }
+        }}
+      />
+
       {/* <Text
             fontSize="large"
             pt="1.5rem"

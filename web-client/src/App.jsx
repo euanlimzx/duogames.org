@@ -1,82 +1,110 @@
-import {
-  Text,
-  Flex,
-  VStack,
-  Button,
-  Box,
-  Stack,
-  Image,
-} from "@chakra-ui/react";
+import { VStack, HStack, Text, Image, Box, Button } from "@chakra-ui/react";
+import { LandingPageTitle } from "./components/LandingPageTitle";
+import { ScreenRecordingBox } from "./components/ScreenRecordingBox";
+import { DuoNavBar } from "./components/DuoNavBar";
+import { useRef } from "react";
 import { useNavigate } from "react-router";
 
 export default function App() {
+  const setupSection = useRef(null);
   let navigate = useNavigate();
-
   return (
     <div className="App">
-      <Flex
-        pt={{ base: "5rem", md: "8rem" }}
-        bg="white"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <VStack gap="1.5rem">
+      <DuoNavBar
+        setupRef={setupSection}
+        isLanding={true}
+        handleLogoClick={() => navigate("/")}
+      />
+      <Box marginBottom={"10rem"}>
+        <VStack gap={"6rem"}>
+          <LandingPageTitle />
           <Text
-            color="black"
-            align="center"
-            fontSize={{ base: "3xl", md: "6xl" }}
-            fontWeight="semibold"
-            px={{ base: "2rem", md: "5rem" }}
+            fontSize={"4xl"}
+            fontWeight={"bold"}
+            textAlign={"center"}
+            ref={setupSection}
           >
-            Browser co-op, from the couch to the cloud.
+            Set Up Duogames
           </Text>
-          <Flex
-            justifyContent="center"
-            alignItems="center"
-            px="1rem"
-            flexDir="column"
-          >
-            <Image
-              src="/gif.gif"
-              alt="Demo video of Duogames"
-              borderRadius="1rem"
-              width="40rem"
-              objectFit="cover"
-            />
-            <Text fontSize="small" pt="0.5rem" textAlign="center">
-              Typically, this game requires a physical, shared keyboard. But
-              here I am, playing it online over facetime!
+          <HStack gap={"13rem"}>
+            <Text fontSize={"xl"} fontWeight={"bold"}>
+              1. Have your partner install our Chrome Extension
             </Text>
-          </Flex>
-          <Stack
-            justifyContent="center"
-            alignItems="center"
-            direction={{ base: "column", md: "row" }}
-            gap={{ base: "0re", md: "1rem" }}
-            pt="1rem"
-          >
-            <Button
-              size="lg"
-              p={{ base: "1rem", md: "1.75rem" }}
-              background="black"
-              color="white"
-              _hover={{ bg: "gray.700" }}
-              onClick={() => navigate("/game-room")}
-            >
-              <Text fontSize={{ base: "lg", md: "1xl" }} fontWeight="semibold">
-                Generate Room Code
+            <a href="https://google.com" target="_blank">
+              <Button
+                size="lg"
+                px={{ base: "1rem", md: "1.75rem" }}
+                py={"2.5rem"}
+                background="black"
+                color="white"
+                _hover={{ bg: "gray.700" }}
+                width={"15rem"}
+              >
+                <HStack>
+                  <Image src="/chrome_web_store.svg" width={"3rem"} />
+                  <Text color={"white"} fontWeight={"bold"}>
+                    Add to Chrome
+                  </Text>
+                </HStack>
+              </Button>
+            </a>
+          </HStack>
+          <HStack gap={"13rem"}>
+            <ScreenRecordingBox
+              src="share_screen.gif"
+              title="Partner's Screen"
+            />
+            <VStack>
+              <Text fontSize={"xl"} fontWeight={"bold"}>
+                2. Set up screen sharing with your partner
               </Text>
-            </Button>
-            <Button
-              size="lg"
-              p={{ base: "1rem", md: "1.75rem" }}
-              _hover={{ bg: "gray.200" }}
-            >
-              Download Extension
-            </Button>
-          </Stack>
+              <Text width={"20rem"} textAlign={"center"}>
+                For the best experience, we'd recommend{" "}
+                <a
+                  href="https://discord.com/channels/"
+                  target="_blank"
+                  style={{ "text-decoration": "underline" }}
+                >
+                  Discord
+                </a>{" "}
+                or{" "}
+                <a href="facetime:" style={{ "text-decoration": "underline" }}>
+                  FaceTime
+                </a>
+              </Text>
+            </VStack>
+          </HStack>
+          <VStack gap={"3rem"}>
+            <Text fontSize={"xl"} fontWeight={"semibold"} textAlign={"center"}>
+              3. Sync Up And Start Paying
+            </Text>
+            <HStack>
+              <VStack width={"40rem"}>
+                <ScreenRecordingBox
+                  src={"key_in_room_code.gif"}
+                  title="Your Screen"
+                />
+                <Text width={"20rem"} textAlign={"center"}>
+                  Click 'Generate Room Code'
+                </Text>
+                <Text></Text>
+              </VStack>
+              <VStack width={"40rem"}>
+                <ScreenRecordingBox
+                  src={"key_in_room_code.gif"}
+                  title="Partner's Screen"
+                />
+                <Text width={"20rem"} textAlign={"center"}>
+                  Pop the code into your partner's Duogames extension and start
+                  playing together!
+                </Text>
+              </VStack>
+            </HStack>
+          </VStack>
         </VStack>
-      </Flex>
+      </Box>
     </div>
   );
 }
+
+// make a note about the adblocker

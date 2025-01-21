@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { socket } from "../socket";
 import CustomSuccessToast from "./CustomSuccessToast";
+import { DuoNavBar } from "./DuoNavBar";
 export function RoomCode({ roomCode, onDisconnect }) {
   const toastId = "copy-toast";
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
