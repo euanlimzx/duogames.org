@@ -16,7 +16,7 @@ export function LandingPageTitle() {
 
   return (
     <Flex
-      pt={{ base: "5rem", md: "5rem" }}
+      pt={{ base: "5rem", md: "6rem" }}
       bg="white"
       flexDirection="column"
       justifyContent="center"
@@ -103,7 +103,7 @@ export function LandingPageTitle() {
           objectFit="cover"
           loading="lazy"
         />
-        <Text fontSize="small" pt="0.5rem" textAlign="center">
+        <Text fontSize="medium" pt="0.5rem" textAlign="center">
           Typically, this game requires a physical, shared keyboard. But here I
           am, playing it online over facetime!
         </Text>

@@ -1,6 +1,6 @@
 import { Flex, Text, HStack, Image, Box, Tooltip } from "@chakra-ui/react";
 
-export function DuoNavBar({ isLanding, setupRef, handleLogoClick }) {
+export function DuoNavBar({ isLanding, handleLogoClick }) {
   return (
     <Flex width={"100%"} zIndex={100} bg="purple.600" justifyContent="center">
       <Text color="white" fontWeight="semibold" fontSize="large" py="1rem">
