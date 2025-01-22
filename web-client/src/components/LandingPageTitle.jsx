@@ -5,6 +5,7 @@ import {
   Stack,
   Image,
   Button,
+  Box,
   HStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
@@ -15,82 +16,97 @@ export function LandingPageTitle() {
 
   return (
     <Flex
-      pt={{ base: "5rem", md: "8rem" }}
+      pt={{ base: "5rem", md: "5rem" }}
       bg="white"
+      flexDirection="column"
       justifyContent="center"
-      alignItems="center"
-      height={"40rem"}
     >
-      <Flex gap="1.5rem">
-        <VStack spacing="3rem" flex={1} justify={"space-evenly"}>
-          <Text
-            color="black"
-            align="center"
-            fontSize={{ base: "3xl", md: "6xl" }}
-            fontWeight="bold"
-            px={{ base: "2rem", md: "5rem" }}
-            width={"85%"}
-          >
-            Browser co-op, from the couch to the cloud.
+      <VStack>
+        <Text
+          color="black"
+          align="center"
+          fontSize={{ base: "3xl", md: "7xl" }}
+          fontWeight="bold"
+        >
+          Free online games for long distance couples ❤️
+        </Text>
+        <Text
+          color="black"
+          align="center"
+          fontSize="2xl"
+          textColor="gray.600"
+          maxW="60%"
+        >
+          <Text>
+            Long distance just got alot a little easier (and a lot more fun!)
           </Text>
-          <Stack
-            justifyContent="center"
-            alignItems="center"
-            direction={{ base: "column", md: "row" }}
-            gap={{ base: "0re", md: "1rem" }}
-            pt="1rem"
-          >
-            <Button
-              size="lg"
-              p={{ base: "1rem", md: "1.75rem" }}
-              background="black"
-              color="white"
-              _hover={{ bg: "gray.700" }}
-              onClick={() => navigate("/game-room")}
-              width={"15rem"}
-            >
-              <Text fontSize={{ base: "lg", md: "1xl" }} fontWeight="semibold">
-                Generate Room Code
-              </Text>
-            </Button>
-            <Button
-              size="lg"
-              p={{ base: "1rem", md: "1.75rem" }}
-              _hover={{ bg: "gray.200" }}
-              width={"15rem"}
-            >
-              <Flex
-                justify={"space-evenly"}
-                alignContent={"center"}
-                gap={"1rem"}
-              >
-                <Text>Download Extension</Text>
-                <TfiNewWindow />
-              </Flex>
-              {/* this should have a popup icon that says get our accompanying extension */}
-            </Button>
-          </Stack>
-        </VStack>
-        <Flex
+          <Text>
+            Play co-op browser games, even if you're not on the same laptop!
+          </Text>
+        </Text>
+        <Stack
           justifyContent="center"
           alignItems="center"
-          px="1rem"
-          flexDir="column"
-          flex={1}
+          direction={{ base: "column", md: "row" }}
+          gap={{ base: "0re", md: "1rem" }}
+          pt="1rem"
         >
-          <Image
-            src="/gif.gif"
-            alt="Demo video of Duogames"
+          <Box
+            bg="black"
+            color="white"
+            px="4.5rem"
+            py="1rem"
             borderRadius="1rem"
-            width="40rem"
-            objectFit="cover"
-            loading="lazy"
-          />
-          <Text fontSize="small" pt="0.5rem" textAlign="center">
-            Typically, this game requires a physical, shared keyboard. But here
-            I am, playing it online over facetime!
-          </Text>
-        </Flex>
+            cursor="pointer"
+            _hover={{ bgGradient: "radial(gray.700, black)" }}
+            onClick={() => navigate("/game-room")}
+            boxShadow="dark-lg"
+          >
+            <Text fontSize="4xl" fontWeight="bold">
+              Create Room
+            </Text>
+          </Box>
+          <Box
+            bg="white"
+            boxShadow="dark-lg"
+            color="black"
+            px="2.5rem"
+            py="1rem"
+            borderRadius="1rem"
+            border="3px"
+            borderColor="black"
+            cursor="pointer"
+            _hover={{ bgGradient: "radial(white, gray.200)" }}
+          >
+            <HStack justifyContent="center" alignItems="center">
+              {" "}
+              <Text fontSize="4xl" fontWeight="bold">
+                Get Extension
+              </Text>{" "}
+              <TfiNewWindow fontWeight="bold" size="30px" />
+            </HStack>
+          </Box>
+        </Stack>
+      </VStack>
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        px="1rem"
+        flexDir="column"
+        pt="5rem"
+      >
+        <Image
+          src="/gif.gif"
+          alt="Demo video of Duogames"
+          borderRadius="1rem"
+          width="50rem"
+          objectFit="cover"
+          loading="lazy"
+        />
+        <Text fontSize="small" pt="0.5rem" textAlign="center">
+          Typically, this game requires a physical, shared keyboard. But here I
+          am, playing it online over facetime!
+        </Text>
       </Flex>
     </Flex>
   );
