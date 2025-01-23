@@ -201,7 +201,7 @@ export default function GameRoom() {
             color="black"
             fontSize="4xl"
             fontWeight="semibold"
-            px="5rem"
+            px={{ base: "2rem", md: "5rem" }}
             textAlign="center"
           >
             Your room code:
@@ -232,8 +232,8 @@ export default function GameRoom() {
             ))}
           </Flex>
         </Box>
-        <Flex h="100%" alignItems="end" justifyContent="end">
-          <Text fontSize="xl">
+        <Flex h="100%" alignItems="end" justifyContent="end" px="2rem">
+          <Text fontSize={{ base: "md", md: "xl" }}>
             Have your partner (with our extension installed) choose a game from{" "}
             <Text as="span">
               <a
