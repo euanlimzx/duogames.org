@@ -92,7 +92,12 @@ export function LandingPageTitle() {
                 fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
                 fontWeight="bold"
               >
-                Get Extension
+                <a
+                  href="https://github.com/euanlimzx/websocket"
+                  target="_blank"
+                >
+                  Get Extension
+                </a>
               </Text>{" "}
               <TfiNewWindow fontWeight="bold" size="30px" />
             </HStack>

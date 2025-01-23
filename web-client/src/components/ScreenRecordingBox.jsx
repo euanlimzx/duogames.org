@@ -7,11 +7,15 @@ export function ScreenRecordingBox({ src, title }) {
         src={src}
         alt="Share Screen Demo"
         borderRadius="1rem"
-        width="40vw"
+        width={{ base: "100%", md: "40vw" }}
         objectFit="cover"
         loading="lazy"
       />
-      <Text textAlign={"center"} marginTop={"1rem"} fontSize="xl">
+      <Text
+        textAlign={"center"}
+        marginTop={"1rem"}
+        fontSize={{ base: "md", md: "xl" }}
+      >
         {title}
       </Text>
     </Box>

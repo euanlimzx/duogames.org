@@ -1,6 +1,6 @@
 import {
   VStack,
-  HStack,
+  Stack,
   Text,
   Image,
   Box,
@@ -15,40 +15,46 @@ export function LandingPageSection() {
   let navigate = useNavigate();
   return (
     <>
-      <VStack gap="5rem" w="80%">
+      <VStack gap={{ base: "2rem", md: "5rem" }} w="80%">
         <Text
-          fontSize={"4xl"}
+          fontSize={{ base: "2xl", md: "4xl" }}
           fontStyle="italic"
           fontWeight={"bold"}
           textAlign={"center"}
         >
           HOW TO GET STARTED
         </Text>
-        <HStack
+        <Stack
+          direction={{ base: "column-reverse", md: "row" }}
           width={"100%"}
           display="flex"
           justifyContent="center"
-          gap="5rem"
+          gap={{ base: "1rem", md: "5rem" }}
         >
           <Flex flex="1" justifyContent="end">
             <ScreenRecordingBox src="share_screen.gif" title="Your Screen" />
           </Flex>
-          <Flex flex="1">
+          <Flex flex="1" alignItems="center">
             <VStack display="flex" alignItems="start">
               {" "}
               <Text
-                fontSize={"4xl"}
+                fontSize={{ base: "2xl", md: "4xl" }}
                 fontWeight={"bold"}
                 textAlign="start"
                 w="100%"
               >
                 1. Download our extension
               </Text>
-              <Text fontSize="2xl" w="100%">
+              <Text
+                fontSize="2xl"
+                display={{ base: "none", md: "block" }}
+                w="100%"
+              >
                 Our extension lets your partner play the games that run on your
                 browser
               </Text>
               <Box
+                display={{ base: "none", md: "block" }}
                 bg="white"
                 boxShadow="dark-lg"
                 color="black"
@@ -61,38 +67,57 @@ export function LandingPageSection() {
                 cursor="pointer"
                 _hover={{ bgGradient: "radial(white, gray.200)" }}
               >
-                <HStack justifyContent="center" alignItems="center">
+                <Stack
+                  direction={{ base: "column", md: "row" }}
+                  justifyContent="center"
+                  alignItems="center"
+                >
                   <Image
                     src="/chrome_web_store.svg"
                     width={"3rem"}
                     marginRight={"0.5rem"}
                   />
-                  <Text fontSize="2xl" fontWeight="bold">
-                    Get Extension
+                  <Text
+                    fontSize="2xl"
+                    display={{ base: "none", md: "block" }}
+                    fontWeight="bold"
+                  >
+                    <a
+                      href="https://github.com/euanlimzx/websocket"
+                      target="_blank"
+                    >
+                      Get Extension
+                    </a>
                   </Text>{" "}
-                </HStack>
+                </Stack>
               </Box>
             </VStack>
           </Flex>
-        </HStack>
-        <HStack
+        </Stack>
+        <Stack
+          direction={{ base: "column", md: "row" }}
           width={"100%"}
           display="flex"
           justifyContent="center"
-          gap="5rem"
+          gap={{ base: "1rem", md: "5rem" }}
         >
-          <Flex flex="1">
+          <Flex flex="1" alignItems="center">
             <VStack>
               {" "}
               <Text
-                fontSize={"4xl"}
+                fontSize={{ base: "2xl", md: "4xl" }}
                 fontWeight={"bold"}
                 textAlign="start"
                 w="100%"
               >
                 2. Visit twoplayergames.org* and share your screen
               </Text>
-              <Text fontSize="2xl" textAlign="start" w="100%">
+              <Text
+                fontSize="2xl"
+                display={{ base: "none", md: "block" }}
+                textAlign="start"
+                w="100%"
+              >
                 For the best experience, we'd recommend{" "}
                 <a
                   href="https://discord.com/channels/"
@@ -106,7 +131,7 @@ export function LandingPageSection() {
                   FaceTime
                 </a>
               </Text>
-              <Text fontSize="xl">
+              <Text fontSize="xl" display={{ base: "none", md: "block" }}>
                 <br />
                 *This is currently the only website supported by our extension
                 though we do plan to add more in the future. There's some ads
@@ -117,12 +142,13 @@ export function LandingPageSection() {
           <Flex flex="1" justifyContent="end">
             <ScreenRecordingBox src="share_screen.gif" title="Your Screen" />
           </Flex>
-        </HStack>
-        <HStack
+        </Stack>
+        <Stack
+          direction={{ base: "column-reverse", md: "row" }}
           width={"100%"}
           display="flex"
           justifyContent="center"
-          gap="5rem"
+          gap={{ base: "1rem", md: "5rem" }}
         >
           <Flex flex="1" justifyContent="end">
             <ScreenRecordingBox
@@ -130,42 +156,52 @@ export function LandingPageSection() {
               title="Your partner's screen"
             />
           </Flex>
-          <Flex flex="1">
+          <Flex flex="1" alignItems="center">
             <VStack display="flex" alignItems="start">
               {" "}
               <Text
-                fontSize={"4xl"}
+                fontSize={{ base: "2xl", md: "4xl" }}
                 fontWeight={"bold"}
                 textAlign="start"
                 w="100%"
               >
                 3. Have your partner visit our site and create a room code
               </Text>
-              <Text fontSize="2xl" w="100%">
+              <Text
+                fontSize="2xl"
+                display={{ base: "none", md: "block" }}
+                w="100%"
+              >
                 Inside the room, any keyboard strokes your partner enters on our
                 site will be executed on your browser!
               </Text>
             </VStack>
           </Flex>
-        </HStack>
-        <HStack
+        </Stack>
+        <Stack
+          direction={{ base: "column", md: "row" }}
           width={"100%"}
           display="flex"
           justifyContent="center"
-          gap="5rem"
+          gap={{ base: "1rem", md: "5rem" }}
         >
-          <Flex flex="1">
+          <Flex flex="1" alignItems="center">
             <VStack>
               {" "}
               <Text
-                fontSize={"4xl"}
+                fontSize={{ base: "2xl", md: "4xl" }}
                 fontWeight={"bold"}
                 textAlign="start"
                 w="100%"
               >
                 4. Choose a game, click multi-play and enter the room code!
               </Text>
-              <Text fontSize="2xl" textAlign="start" w="100%">
+              <Text
+                fontSize="2xl"
+                display={{ base: "none", md: "block" }}
+                textAlign="start"
+                w="100%"
+              >
                 You're all set and ready to play!
               </Text>
             </VStack>
@@ -176,7 +212,7 @@ export function LandingPageSection() {
               title="Your Screen"
             />
           </Flex>
-        </HStack>
+        </Stack>
       </VStack>
       <Text textColor="black">
         Made with ❤️ by{" "}
