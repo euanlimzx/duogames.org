@@ -15,7 +15,7 @@ export function DuoNavBar({ isLanding, handleLogoClick }) {
         <Text
           as="span"
           cursor="pointer"
-          _hover={{ textDecoration: "underline" }}
+          textDecoration="underline"
           fontWeight="bold"
         >
           {" "}

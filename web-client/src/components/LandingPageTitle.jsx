@@ -125,7 +125,7 @@ export function LandingPageTitle() {
           textAlign="center"
         >
           Typically, this game requires a physical, shared keyboard. But here I
-          am, playing it online over facetime!
+          am, playing it online over discord!
         </Text>
       </Flex>
     </Flex>
