@@ -12,7 +12,7 @@ export default function App() {
       <Box marginBottom={"10rem"}>
         <VStack gap={"6rem"}>
           <LandingPageTitle />
-          <LandingPageSection />
+          {/* <LandingPageSection /> */}
         </VStack>
       </Box>
     </div>

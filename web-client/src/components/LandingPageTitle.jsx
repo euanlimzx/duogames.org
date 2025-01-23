@@ -21,11 +21,12 @@ export function LandingPageTitle() {
       flexDirection="column"
       justifyContent="center"
     >
-      <VStack>
+      <VStack px={{ base: "2rem", md: "" }}>
         <Text
           color="black"
           align="center"
-          fontSize={{ base: "3xl", md: "7xl" }}
+          fontSize={{ base: "3xl", md: "6xl", "2xl": "7xl" }}
+          w={{ base: "", md: "70%", "2xl": "100%" }}
           fontWeight="bold"
         >
           Free online games for long distance couples ❤️
@@ -33,9 +34,9 @@ export function LandingPageTitle() {
         <Text
           color="black"
           align="center"
-          fontSize="2xl"
+          fontSize={{ base: "lg", md: "2xl" }}
           textColor="gray.600"
-          maxW="60%"
+          maxW={{ base: "90%", md: "60%" }}
         >
           <Text>
             Long distance just got alot a little easier (and a lot more fun!)
@@ -48,39 +49,49 @@ export function LandingPageTitle() {
           justifyContent="center"
           alignItems="center"
           direction={{ base: "column", md: "row" }}
-          gap={{ base: "0re", md: "1rem" }}
+          gap={{ base: "0.75rem", md: "1rem" }}
           pt="1rem"
         >
           <Box
             bg="black"
             color="white"
-            px="4.5rem"
+            px={{ base: "4rem", md: "4.5rem" }}
             py="1rem"
             borderRadius="1rem"
+            borderWidth="3px"
+            borderStyle="solid"
+            borderColor="black"
             cursor="pointer"
             _hover={{ bgGradient: "radial(gray.700, black)" }}
             onClick={() => navigate("/game-room")}
-            boxShadow="dark-lg"
+            boxShadow={{ base: "lg", md: "dark-lg" }}
           >
-            <Text fontSize="4xl" fontWeight="bold">
+            <Text
+              fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
+              fontWeight="bold"
+            >
               Create Room
             </Text>
           </Box>
           <Box
             bg="white"
-            boxShadow="dark-lg"
+            boxShadow={{ base: "", md: "dark-lg" }}
             color="black"
             px="2.5rem"
             py="1rem"
+            borderWidth="3px"
+            borderStyle="solid"
+            borderColor="gray.300"
             borderRadius="1rem"
-            border="3px"
-            borderColor="black"
             cursor="pointer"
             _hover={{ bgGradient: "radial(white, gray.200)" }}
           >
             <HStack justifyContent="center" alignItems="center">
               {" "}
-              <Text fontSize="4xl" fontWeight="bold">
+              <Text
+                fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
+                fontWeight="bold"
+              >
                 Get Extension
               </Text>{" "}
               <TfiNewWindow fontWeight="bold" size="30px" />
@@ -91,9 +102,9 @@ export function LandingPageTitle() {
       <Flex
         justifyContent="center"
         alignItems="center"
-        px="1rem"
+        px={{ base: "2.5rem", md: "1rem" }}
         flexDir="column"
-        pt="5rem"
+        pt={{ base: "2.25rem", md: "5rem" }}
       >
         <Image
           src="/gif.gif"
@@ -103,7 +114,11 @@ export function LandingPageTitle() {
           objectFit="cover"
           loading="lazy"
         />
-        <Text fontSize="medium" pt="0.5rem" textAlign="center">
+        <Text
+          fontSize={{ base: "sm", md: "medium" }}
+          pt="0.5rem"
+          textAlign="center"
+        >
           Typically, this game requires a physical, shared keyboard. But here I
           am, playing it online over facetime!
         </Text>
