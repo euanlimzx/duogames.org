@@ -38,7 +38,9 @@ export function LandingPageTitle() {
           textColor="gray.600"
           maxW={{ base: "90%", md: "60%" }}
         >
-          <Text>Long distance just a little easier (and a lot more fun!)</Text>
+          <Text>
+            Long distance just got a little easier (and a lot more fun!)
+          </Text>
           <Text>
             Play co-op browser games, even if you're not on the same laptop!
           </Text>
