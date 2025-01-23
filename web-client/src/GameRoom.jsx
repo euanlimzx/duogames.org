@@ -189,53 +189,8 @@ export default function GameRoom() {
           }
         }}
       />
-
-      {/* <Text
-            fontSize="large"
-            pt="1.5rem"
-            fontWeight="semibold"
-            maxW={{ base: "80%", md: "40%" }}
-            lineHeight="2rem"
-            as="span"
-          >
-            <p>How this works:</p>
-            <p>1. Video call your friend and get them to share their screen!</p>
-            <p>
-              2. The party sharing their screen should also download our chrome
-              extension, which can be found{" "}
-              <Text
-                as="span"
-                textDecoration="underline"
-                textUnderlineOffset="3px"
-              >
-                <a
-                  href="https://github.com/euanlimzx/websocket"
-                  target="_blank"
-                >
-                  here
-                </a>
-              </Text>
-            </p>
-            <p>
-              3. Play any game from{" "}
-              <Text
-                as="span"
-                textDecoration="underline"
-                textUnderlineOffset="3px"
-              >
-                <a
-                  href="https://www.twoplayergames.org/game/basket-random"
-                  target="_blank"
-                >
-                  twoplayergames.org
-                </a>
-              </Text>
-              {""} and click 'Multi-play!'
-            </p>
-            <p>4. Generate a room code and play away!</p>
-          </Text> */}
       <Flex
-        bg="white"
+        height="80vh"
         justifyContent="center"
         alignItems="center"
         flexDir="column"
@@ -277,6 +232,21 @@ export default function GameRoom() {
             ))}
           </Flex>
         </Box>
+        <Flex h="100%" alignItems="end" justifyContent="end">
+          <Text fontSize="xl">
+            Have your partner (with our extension installed) choose a game from{" "}
+            <Text as="span">
+              <a
+                href="https://www.twoplayergames.org/"
+                target="_blank"
+                style={{ "text-decoration": "underline" }}
+              >
+                twoplayergames.org
+              </a>{" "}
+            </Text>
+            and enter this room code!
+          </Text>
+        </Flex>
       </Flex>
     </div>
   );

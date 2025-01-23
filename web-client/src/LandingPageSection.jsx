@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   Flex,
+  textDecoration,
 } from "@chakra-ui/react";
 import { ScreenRecordingBox } from "./components/ScreenRecordingBox";
 import { useNavigate } from "react-router";
@@ -176,93 +177,21 @@ export function LandingPageSection() {
             />
           </Flex>
         </HStack>
-        <HStack width={"100%"} display="flex" justifyContent="center">
-          <Flex flex="1" justifyContent="end" paddingRight="3rem">
-            <ScreenRecordingBox
-              src="share_screen.gif"
-              title="Partner's Screen"
-            />
-          </Flex>
-          <Flex flex="1">
-            <VStack paddingLeft={"3rem"}>
-              {" "}
-              <Text fontSize={"4xl"} fontWeight={"bold"} textAlign="start">
-                Visit twoplayergames.org and share your screen
-              </Text>
-              <Text fontSize="2xl">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias
-                magnam, non qui sint dolores asperiores reiciendis, quia earum
-                harum recusandae ducimus porro soluta iste eveniet eligendi
-                natus! Nemo, non illo.
-              </Text>
-            </VStack>
-          </Flex>
-        </HStack>
       </VStack>
+      <Text textColor="black">
+        Made with ❤️ by{" "}
+        <Text as="span" hover={{ textDecoration: "underline" }}>
+          <a href="https://linkedin.com/in/shawn-wei-chew/" target="_blank">
+            Shawn
+          </a>
+        </Text>{" "}
+        &{" "}
+        <Text as="span" hover={{ textDecoration: "underline" }}>
+          <a href="https://linkedin.com/in/euanlimzx/" target="_blank">
+            Euan
+          </a>
+        </Text>{" "}
+      </Text>
     </>
   );
 }
-
-// <HStack gap={"15rem"} width={"80%"}>
-//   <ScreenRecordingBox src="share_screen.gif" title="Partner's Screen" />
-//   <VStack paddingRight={"1rem"}>
-//     <Text fontSize={"xl"} fontWeight={"bold"}>
-//       2. Get your partner to start screen sharing
-//     </Text>
-//     <Text width={"20rem"} textAlign={"center"}>
-//       For the best experience, we'd recommend{" "}
-//       <a
-//         href="https://discord.com/channels/"
-//         target="_blank"
-//         style={{ "text-decoration": "underline" }}
-//       >
-//         Discord
-//       </a>{" "}
-//       or{" "}
-//       <a href="facetime:" style={{ "text-decoration": "underline" }}>
-//         FaceTime
-//       </a>
-//     </Text>
-//   </VStack>
-// </HStack>
-// <HStack gap={"15rem"} width={"80%"}>
-//   <VStack gap={"2rem"} paddingX={"1rem"} alignContent={"center"}>
-//     <Text fontSize={"xl"} fontWeight={"bold"} textAlign={"center"}>
-//       3. Create your Duogames room
-//     </Text>
-//     <Button
-//       size="lg"
-//       p={{ base: "0.5rem", md: "1.5rem" }}
-//       background="black"
-//       borderRadius={"xl"}
-//       color="white"
-//       _hover={{ bg: "gray.700" }}
-//       onClick={() => navigate("/game-room")}
-//       width={"15rem"}
-//     >
-//       <Text fontSize={{ base: "lg", md: "1xl" }} fontWeight="semibold">
-//         Get Room Code !!!
-//       </Text>
-//     </Button>
-//   </VStack>
-//   <ScreenRecordingBox
-//     src={"key_in_room_code.gif"}
-//     title="Your Screen"
-//   />
-// </HStack>
-// <HStack gap={"15rem"} width={"80%"}>
-//   <ScreenRecordingBox
-//     src={"key_in_room_code.gif"}
-//     title="Partner's Screen"
-//   />
-
-//   <VStack paddingRight={"1rem"}>
-//     <Text fontSize={"xl"} fontWeight={"bold"} textAlign={"center"}>
-//       4. Get your partner to join the room
-//     </Text>
-//     <Text width={"20rem"} textAlign={"center"}>
-//       Pop the code into your partner's Duogames extension and start
-//       playing together!
-//     </Text>
-//   </VStack>
-// </HStack>
