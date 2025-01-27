@@ -51,13 +51,6 @@ export default function GameRoom() {
     }
   }
 
-  const generateRoom = useCallback(async () => {
-    socket.connect();
-    setNumberOfPlayers(1);
-    await axios.get(`${GAME_COUNTER_ENDPOINT}/up`);
-    setCookieIfNotExists();
-  }, []);
-
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);
@@ -174,8 +167,25 @@ export default function GameRoom() {
     return () => clearInterval(interval);
   }, [lastKeyPressTime, isConnected]);
 
+  const handleBackNavigation = () => {
+    if (socket.connected) {
+      socket.disconnect();
+    } else {
+      onDisconnect();
+    }
+  }
+
+  const generateRoom = useCallback(async () => {
+    socket.connect();
+    setNumberOfPlayers(1);
+    await axios.get(`${GAME_COUNTER_ENDPOINT}/up`);
+    setCookieIfNotExists();
+  }, []);
+
   useEffect(() => {
     (async () => await generateRoom())();
+    window.addEventListener("popstate", handleBackNavigation);
+    return () => window.removeEventListener("popstate", handleBackNavigation);
   }, [generateRoom]);
 
   return (
