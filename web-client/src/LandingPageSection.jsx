@@ -32,7 +32,7 @@ export function LandingPageSection() {
           gap={{ base: "1rem", md: "5rem" }}
         >
           <Flex flex="1" justifyContent="end">
-            <ScreenRecordingBox src="share_screen.gif" title="Your Screen" />
+            <ScreenRecordingBox videoSrc="share_screen.mp4" placeholderImageSrc="share_screen.webp" title="Your Screen" />
           </Flex>
           <Flex flex="1" alignItems="center">
             <VStack display="flex" alignItems="start">
@@ -140,7 +140,7 @@ export function LandingPageSection() {
             </VStack>
           </Flex>
           <Flex flex="1" justifyContent="end">
-            <ScreenRecordingBox src="share_screen.gif" title="Your Screen" />
+            <ScreenRecordingBox videoSrc="share_screen.mp4" placeholderImageSrc="share_screen.webp" title="Your Screen" />
           </Flex>
         </Stack>
         <Stack
@@ -152,7 +152,8 @@ export function LandingPageSection() {
         >
           <Flex flex="1" justifyContent="end">
             <ScreenRecordingBox
-              src="share_screen.gif"
+              videoSrc="generate_room_code.mp4"
+              placeholderImageSrc="generate_room_code.webp"
               title="Your partner's screen"
             />
           </Flex>
@@ -208,7 +209,8 @@ export function LandingPageSection() {
           </Flex>
           <Flex flex="1" justifyContent="end">
             <ScreenRecordingBox
-              src="key_in_room_code.gif"
+              videoSrc="key_in_room_code.mp4"
+              placeholderImageSrc="key_in_room_code.webp"
               title="Your Screen"
             />
           </Flex>
