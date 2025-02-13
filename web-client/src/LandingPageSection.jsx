@@ -32,7 +32,11 @@ export function LandingPageSection() {
           gap={{ base: "1rem", md: "5rem" }}
         >
           <Flex flex="1" justifyContent="end">
-            <ScreenRecordingBox videoSrc="share_screen.mp4" placeholderImageSrc="share_screen.webp" title="Your Screen" />
+            <ScreenRecordingBox
+              videoSrc="download_extension.mp4"
+              placeholderImageSrc="download_extension.webp"
+              title="Your Screen"
+            />
           </Flex>
           <Flex flex="1" alignItems="center">
             <VStack display="flex" alignItems="start">
@@ -83,7 +87,7 @@ export function LandingPageSection() {
                     fontWeight="bold"
                   >
                     <a
-                      href="https://github.com/euanlimzx/websocket"
+                      href="https://chromewebstore.google.com/detail/duogames/menhjppgdgkbmeabgkpdmkemaljmehoa"
                       target="_blank"
                     >
                       Get Extension
@@ -140,7 +144,11 @@ export function LandingPageSection() {
             </VStack>
           </Flex>
           <Flex flex="1" justifyContent="end">
-            <ScreenRecordingBox videoSrc="share_screen.mp4" placeholderImageSrc="share_screen.webp" title="Your Screen" />
+            <ScreenRecordingBox
+              videoSrc="share_screen.mp4"
+              placeholderImageSrc="share_screen.webp"
+              title="Your Screen"
+            />
           </Flex>
         </Stack>
         <Stack
