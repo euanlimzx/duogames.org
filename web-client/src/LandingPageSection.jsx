@@ -191,6 +191,7 @@ export function LandingPageSection() {
               </Text>
               <Box
                 bg="black"
+                display={{ base: "none", md: "block" }}
                 color="white"
                 px={{ base: "2rem", md: "2.5rem" }}
                 mt="1.5rem"
