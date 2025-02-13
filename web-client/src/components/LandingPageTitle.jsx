@@ -93,7 +93,7 @@ export function LandingPageTitle() {
                 fontWeight="bold"
               >
                 <a
-                  href="https://github.com/euanlimzx/websocket"
+                  href="https://chromewebstore.google.com/detail/duogames/menhjppgdgkbmeabgkpdmkemaljmehoa"
                   target="_blank"
                 >
                   Get Extension
@@ -124,8 +124,8 @@ export function LandingPageTitle() {
           pt="0.5rem"
           textAlign="center"
         >
-          Typically, this game requires a physical, shared keyboard. But here I
-          am, playing it online over discord!
+          Typically, this game requires a physical, shared keyboard. But we are,
+          playing it online over discord!
         </Text>
       </Flex>
     </Flex>

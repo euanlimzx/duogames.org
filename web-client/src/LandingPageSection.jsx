@@ -114,7 +114,7 @@ export function LandingPageSection() {
                 textAlign="start"
                 w="100%"
               >
-                2. Visit twoplayergames.org* and share your screen
+                2. Choose any 2-player browser game share your screen
               </Text>
               <Text
                 fontSize="2xl"
@@ -137,7 +137,12 @@ export function LandingPageSection() {
               </Text>
               <Text fontSize="xl" display={{ base: "none", md: "block" }}>
                 <br />
-                *This is currently the only website supported by our extension
+                *Currently, our extension only supports{" "}
+                <Text as="span" textDecoration="underline">
+                  <a href="https://www.twoplayergames.org/" target="_blank">
+                    twoplayergames.org
+                  </a>
+                </Text>{" "}
                 though we do plan to add more in the future. There's some ads
                 though, so we'd recommend using an Adblocker!
               </Text>
@@ -174,16 +179,38 @@ export function LandingPageSection() {
                 textAlign="start"
                 w="100%"
               >
-                3. Have your partner visit our site and create a room code
+                3. Have your partner visit our site and create a room
               </Text>
               <Text
                 fontSize="2xl"
                 display={{ base: "none", md: "block" }}
                 w="100%"
               >
-                Inside the room, any keyboard strokes your partner enters on our
-                site will be executed on your browser!
+                Inside the room, every keystroke your partner enters will be
+                instantly reflected on your screen!
               </Text>
+              <Box
+                bg="black"
+                color="white"
+                px={{ base: "2rem", md: "2.5rem" }}
+                mt="1.5rem"
+                py="1rem"
+                borderRadius="1rem"
+                borderWidth="3px"
+                borderStyle="solid"
+                borderColor="black"
+                cursor="pointer"
+                _hover={{ bgGradient: "radial(gray.700, black)" }}
+                onClick={() => navigate("/game-room")}
+                boxShadow={{ base: "lg", md: "dark-lg" }}
+              >
+                <Text
+                  fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+                  fontWeight="bold"
+                >
+                  Create Room
+                </Text>
+              </Box>
             </VStack>
           </Flex>
         </Stack>
