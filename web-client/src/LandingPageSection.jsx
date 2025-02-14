@@ -70,6 +70,12 @@ export function LandingPageSection() {
                 borderColor="black"
                 cursor="pointer"
                 _hover={{ bgGradient: "radial(white, gray.200)" }}
+                onClick={() => {
+                  window.open(
+                    "https://chromewebstore.google.com/detail/duogames/menhjppgdgkbmeabgkpdmkemaljmehoa",
+                    "_blank"
+                  );
+                }}
               >
                 <Stack
                   direction={{ base: "column", md: "row" }}

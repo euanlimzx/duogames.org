@@ -85,6 +85,12 @@ export function LandingPageTitle() {
             borderRadius="1rem"
             cursor="pointer"
             _hover={{ bgGradient: "radial(white, gray.200)" }}
+            onClick={() => {
+              window.open(
+                "https://chromewebstore.google.com/detail/duogames/menhjppgdgkbmeabgkpdmkemaljmehoa",
+                "_blank"
+              );
+            }}
           >
             <HStack justifyContent="center" alignItems="center">
               {" "}
