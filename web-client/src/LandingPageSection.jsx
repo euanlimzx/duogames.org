@@ -120,7 +120,7 @@ export function LandingPageSection() {
                 textAlign="start"
                 w="100%"
               >
-                2. Choose any 2-player browser game share your screen
+                2. Choose any 2-player browser game and share your screen
               </Text>
               <Text
                 fontSize="2xl"
